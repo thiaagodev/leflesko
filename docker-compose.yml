@@ -1,0 +1,14 @@
+services:
+  postgres-leflesko:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports: 
+      - 5432:5432
+    restart: always
+  
+volumes:
+  postgres_data:
