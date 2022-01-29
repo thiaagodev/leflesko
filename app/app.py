@@ -5,6 +5,9 @@ from app.ext import database, serializer
 from dotenv import load_dotenv
 import os
 
+from app.user.controllers import bp_users
+
+
 load_dotenv()
 
 def create_app():
@@ -20,7 +23,6 @@ def create_app():
     Migrate(app, app.db)
     JWTManager(app)
     
-    return app
-
-
+    app.register_blueprint(bp_users)
     
+    return app
