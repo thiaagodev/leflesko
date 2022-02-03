@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from app.ext import database, serializer
 from dotenv import load_dotenv
 import os
+import pytz
 
 from app.user.controllers import bp_users
 
@@ -16,6 +17,8 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    
+    app.timezone = pytz.timezone('Etc/GMT+3')
     
     database.init_app(app)
     serializer.init_app(app)
