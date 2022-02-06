@@ -35,9 +35,9 @@ def word():
 def add_new_word():
     schema = WordSchema()
     with open('app/game/palavras.txt', 'r') as file:
-            lines = file.readlines()
-            word = choice(lines).strip()
-            
-            word = schema.load({'word': word})
-            current_app.db.session.add(word)
-            current_app.db.session.commit()
+        lines = file.readlines()
+        word = choice(lines).strip()
+        
+        word = schema.load({'word': word})
+        current_app.db.session.add(word)
+        current_app.db.session.commit()
