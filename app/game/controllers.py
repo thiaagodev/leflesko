@@ -19,12 +19,9 @@ def word():
     word = Word.query.order_by(desc(Word.created_at)).first()
     
     now = datetime.now().astimezone(current_app.timezone)
-    current = word.created_at.astimezone(current_app.timezone)
+    last_word_date = word.created_at.astimezone(current_app.timezone)
     
-    diff_time = now - current
-    hours_diff = int(diff_time.total_seconds() / 3600)
-    
-    if hours_diff >= 24:
+    if now.day > last_word_date.day:
          add_new_word()
     
     word = Word.query.order_by(desc(Word.created_at)).first()
