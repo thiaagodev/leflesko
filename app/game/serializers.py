@@ -1,9 +1,9 @@
 from app.ext.serializer import ma
 from marshmallow import ValidationError, validates
-from .models import Letter
+from .models import Word
 
 
-class LetterSchema(ma.SQLAlchemyAutoSchema):
+class WordSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Letter
+        model = Word
         load_instance = True

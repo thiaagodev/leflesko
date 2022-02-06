@@ -7,6 +7,7 @@ import os
 import pytz
 
 from app.user.controllers import bp_users
+from app.game.controllers import bp_word
 
 
 load_dotenv()
@@ -27,5 +28,6 @@ def create_app():
     JWTManager(app)
     
     app.register_blueprint(bp_users)
+    app.register_blueprint(bp_word)
     
     return app
