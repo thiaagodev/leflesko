@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from app.ext import database, serializer
 from dotenv import load_dotenv
 import os
@@ -26,6 +27,7 @@ def create_app():
     
     Migrate(app, app.db)
     JWTManager(app)
+    CORS(app, origins="*")
     
     app.register_blueprint(bp_users)
     app.register_blueprint(bp_word)

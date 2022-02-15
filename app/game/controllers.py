@@ -28,6 +28,18 @@ def word():
 
     return schema.jsonify(word), 200
 
+@bp_word.route('/all', methods=['GET'])
+def words():
+    with open('app/game/palavras.txt', 'r') as file:
+        lines = file.readlines()
+    
+    words = [word.strip() for word in lines]
+    
+    data = {
+        'words': words
+    }
+    
+    return jsonify(data), 200
 
 def add_new_word():
     schema = WordSchema()
