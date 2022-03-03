@@ -21,7 +21,7 @@ def word():
     now = datetime.now().astimezone(current_app.timezone)
     last_word_date = word.created_at.astimezone(current_app.timezone)
     
-    if now.day > last_word_date.day:
+    if now.day > last_word_date.day or now.month > last_word_date.month:
          add_new_word()
     
     word = Word.query.order_by(desc(Word.created_at)).first()
