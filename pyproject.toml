@@ -29,6 +29,7 @@ six = "1.16.0"
 SQLAlchemy = "1.4.31"
 Werkzeug = "2.0.2"
 Flask-Cors = "^3.0.10"
+requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 

@@ -4,6 +4,8 @@ from .serializers import WordSchema
 from random import choice
 from sqlalchemy import desc
 from datetime import datetime
+import requests
+
 
 bp_word = Blueprint('word', __name__, url_prefix='/word')
 
@@ -41,12 +43,24 @@ def words():
     
     return jsonify(data), 200
 
+
 def add_new_word():
     schema = WordSchema()
     with open('app/game/palavras.txt', 'r') as file:
         lines = file.readlines()
-        word = choice(lines).strip()
         
-        word = schema.load({'word': word})
-        current_app.db.session.add(word)
-        current_app.db.session.commit()
+    while True:
+        word = choice(lines).strip()
+        request = requests.get(f'https://significado.herokuapp.com/{word.lower()}')
+        data = request.json()
+        
+        if type(data) is list:
+            data = data[0]
+            
+        if request.status_code == 200 and data['class'] != "":
+            word = schema.load({'word': word})
+            current_app.db.session.add(word)
+            current_app.db.session.commit()
+            
+            return   
+    
